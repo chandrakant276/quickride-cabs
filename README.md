@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chandrakant Car Rental</title>
+    <title>QuickRide Cabs</title>
     <style>
         body {
             margin: 0;
@@ -77,7 +77,7 @@
 <body>
 
 <header>
-    <h1>🚗 CHANDRAKANT CAR RENTAL</h1>
+    <h1>🚗 QuickRide Cabs</h1>
     <p>आपका सफर, हमारी जिम्मेदारी!</p>
     <p>Sonbhadra | Renukoot | Uttar Pradesh</p>
 </header>
@@ -147,7 +147,7 @@
 </div>
 
 <footer>
-    <p>© 2026 Chandrakant Car Rental</p>
+    <p>© 2026 QuickRide Cabs</p>
     <p>Renukoot, Sonbhadra, Uttar Pradesh</p>
 </footer>
 
