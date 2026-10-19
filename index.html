@@ -1,1 +1,158 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1730">
+<title>QuickRide Cabs India | Taxi Booking</title>
+<meta name="description" content="Local, outstation, airport and wedding car booking with QuickRide Cabs India.">
+<style>
+:root{--navy:#0b1730;--blue:#203b64;--gold:#ffbf36;--bg:#f5f7fb;--ink:#172033;--muted:#647087;--green:#168c55}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:var(--bg);line-height:1.5}
+header{background:var(--navy);color:#fff;padding:18px 5%;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.brand{font-size:1.3rem;font-weight:800}.brand span{color:var(--gold)}header a{color:white;text-decoration:none;font-weight:bold}
+.hero{padding:38px 5%;background:linear-gradient(120deg,var(--navy),var(--blue));color:white;display:grid;grid-template-columns:1fr 1fr;gap:25px;align-items:center}
+h1{font-size:clamp(2rem,4vw,3.3rem);line-height:1.1;margin:10px 0 14px}.hero p{color:#e0e8f5}.eyebrow{color:var(--gold);font-weight:bold;letter-spacing:1px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}.chip{border:1px solid #ffffff55;border-radius:25px;padding:7px 11px}
+.card{background:#fff;color:var(--ink);padding:22px;border-radius:16px;box-shadow:0 16px 45px #0003}.card h2{margin:0}.muted{color:var(--muted);font-size:.9rem;margin:4px 0 16px}
+form{display:grid;grid-template-columns:1fr 1fr;gap:11px}.full{grid-column:1/-1}label{display:block;font-size:.85rem;font-weight:bold;margin-bottom:4px}
+input,select,textarea{width:100%;padding:11px;border:1px solid #d6dce7;border-radius:8px;font:inherit;background:#fff}
+button,.btn{display:inline-block;border:0;border-radius:9px;padding:13px 16px;font-size:1rem;font-weight:bold;text-decoration:none;text-align:center;cursor:pointer}
+.whatsapp{background:var(--green);color:#fff}.gold{background:var(--gold);color:#241a05}.notice{font-size:.8rem;color:var(--muted);margin-bottom:0}
+section{padding:38px 5%}.title{text-align:center;font-size:2rem;margin:0 0 7px}.subtitle{text-align:center;color:var(--muted);max-width:680px;margin:0 auto 22px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.service{background:white;border:1px solid #e7ebf3;border-radius:13px;padding:18px}.service h3{margin:8px 0 5px}.service p{margin:0;color:var(--muted);font-size:.93rem}.icon{font-size:1.8rem}
+.areas{background:#eaf0f8;text-align:center}.tags{display:flex;justify-content:center;flex-wrap:wrap;gap:8px}.tags span{background:#fff;border:1px solid #dce2ed;border-radius:22px;padding:7px 12px}
+.cta{background:var(--navy);color:white;border-radius:14px;padding:23px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}.cta h2{margin:0 0 5px}.cta p{margin:0;color:#dce5f5}
+footer{background:#071020;color:#dce5f5;text-align:center;padding:22px 5%;font-size:.9rem}footer p{margin:5px}footer a{color:var(--gold)}
+@media(max-width:820px){.hero{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){form{grid-template-columns:1fr}.full{grid-column:auto}.grid{grid-template-columns:1fr}.card{padding:17px}.hero{padding:28px 5%}}
+</style>
+</head>
+<body>
+<header><div class="brand">🚖 QuickRide <span>Cabs India</span></div><a href="tel:+918853115915">📞 +91 88531 15915</a></header>
+<main>
+<div class="hero">
+<div><div class="eyebrow">SAFE • SIMPLE • CONVENIENT</div><h1>आपकी हर यात्रा के लिए<br>भरोसेमंद कैब</h1>
+<p>लोकल, आउटस्टेशन, एयरपोर्ट पिकअप-ड्रॉप और शादी/इवेंट के लिए कार बुकिंग अनुरोध भेजें।</p>
+<div class="chips"><span class="chip">🏙️ लोकल</span><span class="chip">🛣️ आउटस्टेशन</span><span class="chip">✈️ एयरपोर्ट</span><span class="chip">💍 शादी / इवेंट</span></div></div>
+<div class="card" id="booking"><h2>🚘 कैब बुकिंग फॉर्म</h2><p class="muted">जानकारी भरें; WhatsApp खुलेगा और बुकिंग संदेश तैयार होगा।</p>
+<form id="bookingForm">
+<div class="full"><label for="type">बुकिंग का प्रकार *</label><select id="type" required><option value="">चुनें</option><option>लोकल बुकिंग</option><option>आउटस्टेशन बुकिंग</option><option>एयरपोर्ट पिकअप</option><option>एयरपोर्ट ड्रॉप</option><option>शादी / इवेंट बुकिंग</option></select></div>
+<div><label for="name">आपका नाम *</label><input id="name" autocomplete="name" placeholder="पूरा नाम" required></div>
+<div><label for="mobile">मोबाइल नंबर *</label><input id="mobile" type="tel" inputmode="tel" placeholder="मोबाइल नंबर" required></div>
+<div><label for="pickup">पिकअप कहाँ से? *</label><input id="pickup" placeholder="शहर / पता" required></div>
+<div><label for="drop">कहाँ जाना है? *</label><input id="drop" placeholder="शहर / पता" required></div>
+<div><label for="date">यात्रा की तारीख *</label><input id="date" type="date" required></div>
+<div><label for="time">पिकअप का समय *</label><input id="time" type="time" required></div>
+<div><label for="car">गाड़ी का प्रकार *</label><select id="car" required><option value="">गाड़ी चुनें</option><option>Hatchback (छोटी कार)</option><option>Sedan</option><option>SUV / MUV</option><option>शादी के लिए कार</option><option>कोई भी उपलब्ध गाड़ी</option></select></div>
+<div><label for="people">यात्री</label><select id="people"><option>1</option><option>2</option><option selected>3</option><option>4</option><option>5</option><option>6</option><option>7 या अधिक</option></select></div>
+<div class="full"><label for="details">अतिरिक्त जानकारी (वैकल्पिक)</label><textarea id="details" rows="2" placeholder="राउंड ट्रिप, फ्लाइट नंबर, सामान आदि"></textarea></div>
+<button class="whatsapp full" type="submit">WhatsApp पर बुकिंग भेजें ↗</button>
+</form><p class="notice">यह बुकिंग अनुरोध है। किराया, गाड़ी की उपलब्धता और पुष्टि फोन/WhatsApp पर की जाएगी।</p><p id="status" aria-live="polite"></p>
+</div></div>
+<section><h2 class="title">हमारी सेवाएँ</h2><p class="subtitle">अपनी जरूरत के हिसाब से बुकिंग अनुरोध भेजें।</p><div class="grid">
+<article class="service"><div class="icon">🏙️</div><h3>लोकल कैब</h3><p>शहर के अंदर काम, खरीदारी या अन्य यात्रा के लिए।</p></article>
+<article class="service"><div class="icon">🛣️</div><h3>आउटस्टेशन</h3><p>एक शहर से दूसरे शहर और वापसी यात्रा के लिए।</p></article>
+<article class="service"><div class="icon">✈️</div><h3>एयरपोर्ट ट्रांसफर</h3><p>एयरपोर्ट पिकअप या ड्रॉप के लिए अनुरोध भेजें।</p></article>
+<article class="service"><div class="icon">💍</div><h3>शादी / इवेंट</h3><p>शादी और समारोह के लिए कार बुकिंग अनुरोध।</p></article>
+</div></section>
+<section class="areas"><h2 class="title">हमारे सेवा क्षेत्र</h2><p class="subtitle">इन शहरों और आसपास के क्षेत्रों के लिए बुकिंग अनुरोध कर सकते हैं; उपलब्धता पहले कन्फर्म करें।</p><div class="tags"><span>Renukoot</span><span>Robertsganj</span><span>Varanasi / Banaras</span><span>Vindhamganj</span><span>Garhwa</span><span>Ranchi</span><span>Lucknow</span><span>Kanpur</span><span>Shaktinagar</span><span>Waidhan</span><span>Mirzapur</span></div></section>
+<section><div class="cta"><div><h2>कैब बुक करनी है?</h2><p>कॉल करें या ऊपर दिया बुकिंग फॉर्म भरें।</p></div><a class="btn gold" href="tel:+918853115915">📞 अभी कॉल करें</a></div></section>
+</main>
+<footer><p><strong>QuickRide Cabs India</strong></p><p>फोन / WhatsApp: <a href="https://wa.me/918853115915" target="_blank" rel="noopener">+91 88531 15915</a></p><p>Local • Outstation • Airport • Wedding & Event Cars</p><p>© <span id="year"></span> QuickRide Cabs India</p></footer>
+<script>
+const SUPABASE_FUNCTION_URL =
+  "https://vhekazwlglduwusvavly.supabase.co/functions/v1/swift-processor";
 
+const WA_NUMBER = "918853115915";
+
+document.getElementById("year").textContent =
+  new Date().getFullYear();
+
+const dateField = document.getElementById("date");
+const now = new Date();
+
+dateField.min = new Date(
+  now.getTime() - now.getTimezoneOffset() * 60000
+).toISOString().slice(0, 10);
+
+document.getElementById("bookingForm").addEventListener("submit", async function(e) {
+  e.preventDefault();
+
+  const val = id => document.getElementById(id).value.trim();
+  const digits = val("mobile").replace(/\D/g, "");
+
+  if (digits.length < 10 || digits.length > 13) {
+    alert("कृपया सही मोबाइल नंबर भरें।");
+    document.getElementById("mobile").focus();
+    return;
+  }
+
+  const status = document.getElementById("status");
+  const button = this.querySelector('button[type="submit"]');
+
+  const booking = {
+    customer_name: val("name"),
+    customer_phone: val("mobile"),
+    service_type: val("type"),
+    requested_car_name: val("car"),
+    pickup_location: val("pickup"),
+    destination: val("drop"),
+    travel_date: val("date"),
+    travel_time: val("time")
+  };
+
+  button.disabled = true;
+  status.textContent = "बुकिंग सेव हो रही है…";
+
+  try {
+    const response = await fetch(SUPABASE_FUNCTION_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(booking)
+    });
+
+    const result = await response.json();
+
+    if (!response.ok || !result.success) {
+      throw new Error(result.message || "बुकिंग सेव नहीं हुई।");
+    }
+
+    const msg = [
+      "🚖 *नई कैब बुकिंग रिक्वेस्ट - QuickRide Cabs India*",
+      "",
+      "*बुकिंग नंबर:* " + (result.booking?.booking_number || "पुष्टि लंबित"),
+      "*बुकिंग प्रकार:* " + booking.service_type,
+      "*नाम:* " + booking.customer_name,
+      "*ग्राहक मोबाइल:* " + booking.customer_phone,
+      "*पिकअप:* " + booking.pickup_location,
+      "*ड्रॉप:* " + booking.destination,
+      "*तारीख:* " + booking.travel_date,
+      "*समय:* " + booking.travel_time,
+      "*गाड़ी:* " + booking.requested_car_name,
+      "*यात्री:* " + val("people"),
+      "*अतिरिक्त जानकारी:* " + (val("details") || "नहीं दी गई"),
+      "",
+      "कृपया किराया और गाड़ी की उपलब्धता कन्फर्म करें।"
+    ].join("\n");
+
+    status.textContent =
+      "बुकिंग सेव हो गई। अब WhatsApp खुलेगा; संदेश भेजने के लिए Send दबाएँ।";
+
+    const url = "https://wa.me/" + WA_NUMBER +
+      "?text=" + encodeURIComponent(msg);
+
+    const win = window.open(url, "_blank");
+
+    if (!win) {
+      window.location.href = url;
+    }
+  } catch (error) {
+    status.textContent =
+      "बुकिंग सेव नहीं हुई: " + error.message +
+      "। कृपया 8853115915 पर कॉल करें।";
+  } finally {
+    button.disabled = false;
+  }
+});
