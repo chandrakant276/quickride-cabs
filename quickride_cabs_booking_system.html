@@ -60,23 +60,99 @@ footer{background:#071020;color:#dce5f5;text-align:center;padding:22px 5%;font-s
 </main>
 <footer><p><strong>QuickRide Cabs India</strong></p><p>फोन / WhatsApp: <a href="https://wa.me/918853115915" target="_blank" rel="noopener">+91 88531 15915</a></p><p>Local • Outstation • Airport • Wedding & Event Cars</p><p>© <span id="year"></span> QuickRide Cabs India</p></footer>
 <script>
-const WA_NUMBER="918853115915";
-document.getElementById("year").textContent=new Date().getFullYear();
-const dateField=document.getElementById("date");
-const now=new Date();dateField.min=new Date(now.getTime()-now.getTimezoneOffset()*60000).toISOString().slice(0,10);
-document.getElementById("bookingForm").addEventListener("submit",function(e){
- e.preventDefault();
- const val=id=>document.getElementById(id).value.trim();
- const digits=val("mobile").replace(/\D/g,"");
- if(digits.length<10||digits.length>13){alert("कृपया सही मोबाइल नंबर भरें।");document.getElementById("mobile").focus();return;}
- const msg=["🚖 *नई कैब बुकिंग रिक्वेस्ट - QuickRide Cabs India*","",
- "*बुकिंग प्रकार:* "+val("type"),"*नाम:* "+val("name"),"*ग्राहक मोबाइल:* "+val("mobile"),
- "*पिकअप:* "+val("pickup"),"*ड्रॉप:* "+val("drop"),"*तारीख:* "+val("date"),"*समय:* "+val("time"),
- "*गाड़ी:* "+val("car"),"*यात्री:* "+val("people"),"*अतिरिक्त जानकारी:* "+(val("details")||"नहीं दी गई"),
- "","कृपया किराया और गाड़ी की उपलब्धता कन्फर्म करें।"].join("\n");
- const url="https://wa.me/"+WA_NUMBER+"?text="+encodeURIComponent(msg);
- const win=window.open(url,"_blank");if(!win)window.location.href=url;
- document.getElementById("status").textContent="WhatsApp में संदेश खुलेगा। विवरण जाँचकर Send दबाएँ।";
+const SUPABASE_FUNCTION_URL =
+  "https://vhekazwlglduwusvavly.supabase.co/functions/v1/swift-processor";
+
+const WA_NUMBER = "918853115915";
+
+document.getElementById("year").textContent =
+  new Date().getFullYear();
+
+const dateField = document.getElementById("date");
+const now = new Date();
+
+dateField.min = new Date(
+  now.getTime() - now.getTimezoneOffset() * 60000
+).toISOString().slice(0, 10);
+
+document.getElementById("bookingForm").addEventListener("submit", async function(e) {
+  e.preventDefault();
+
+  const val = id => document.getElementById(id).value.trim();
+  const digits = val("mobile").replace(/\D/g, "");
+
+  if (digits.length < 10 || digits.length > 13) {
+    alert("कृपया सही मोबाइल नंबर भरें।");
+    document.getElementById("mobile").focus();
+    return;
+  }
+
+  const status = document.getElementById("status");
+  const button = this.querySelector('button[type="submit"]');
+
+  const booking = {
+    customer_name: val("name"),
+    customer_phone: val("mobile"),
+    service_type: val("type"),
+    requested_car_name: val("car"),
+    pickup_location: val("pickup"),
+    destination: val("drop"),
+    travel_date: val("date"),
+    travel_time: val("time")
+  };
+
+  button.disabled = true;
+  status.textContent = "बुकिंग सेव हो रही है…";
+
+  try {
+    const response = await fetch(SUPABASE_FUNCTION_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(booking)
+    });
+
+    const result = await response.json();
+
+    if (!response.ok || !result.success) {
+      throw new Error(result.message || "बुकिंग सेव नहीं हुई।");
+    }
+
+    const msg = [
+      "🚖 *नई कैब बुकिंग रिक्वेस्ट - QuickRide Cabs India*",
+      "",
+      "*बुकिंग नंबर:* " + (result.booking?.booking_number || "पुष्टि लंबित"),
+      "*बुकिंग प्रकार:* " + booking.service_type,
+      "*नाम:* " + booking.customer_name,
+      "*ग्राहक मोबाइल:* " + booking.customer_phone,
+      "*पिकअप:* " + booking.pickup_location,
+      "*ड्रॉप:* " + booking.destination,
+      "*तारीख:* " + booking.travel_date,
+      "*समय:* " + booking.travel_time,
+      "*गाड़ी:* " + booking.requested_car_name,
+      "*यात्री:* " + val("people"),
+      "*अतिरिक्त जानकारी:* " + (val("details") || "नहीं दी गई"),
+      "",
+      "कृपया किराया और गाड़ी की उपलब्धता कन्फर्म करें।"
+    ].join("\n");
+
+    status.textContent =
+      "बुकिंग सेव हो गई। अब WhatsApp खुलेगा; संदेश भेजने के लिए Send दबाएँ।";
+
+    const url = "https://wa.me/" + WA_NUMBER +
+      "?text=" + encodeURIComponent(msg);
+
+    const win = window.open(url, "_blank");
+
+    if (!win) {
+      window.location.href = url;
+    }
+  } catch (error) {
+    status.textContent =
+      "बुकिंग सेव नहीं हुई: " + error.message +
+      "। कृपया 8853115915 पर कॉल करें।";
+  } finally {
+    button.disabled = false;
+  }
 });
-</script>
-</body></html>
