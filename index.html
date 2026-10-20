@@ -77,7 +77,7 @@ dateField.min = new Date(
 
 document.getElementById("bookingForm").addEventListener("submit", async function(e) {
   e.preventDefault();
-
+alert("QuickRide booking form is working!");
   const val = id => document.getElementById(id).value.trim();
   const digits = val("mobile").replace(/\D/g, "");
 
