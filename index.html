@@ -105,6 +105,7 @@ document.getElementById("bookingForm").addEventListener("submit", async function
   status.textContent = "बुकिंग सेव हो रही है…";
 
   try {
+    console.log("QuickRide booking submit started");
     const response = await fetch(SUPABASE_FUNCTION_URL, {
       method: "POST",
       headers: {
